@@ -1,2 +1,4 @@
 # ReNet
-A Network Environment to Test Reinforcement Learning Techniques
+A network environment to test reinforcement learning techniques.
+
+Details will be added soon :)
