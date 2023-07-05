@@ -21,4 +21,6 @@ The environment includes:
 
     - How to config: ./request/config.py
 
+- SERVICE: Currently a very simple class, but will be extended soon. 
+
 Details will be added soon :)

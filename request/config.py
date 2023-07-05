@@ -26,6 +26,7 @@ REQUEST_SAMPLE = {
         "DLY_REQUIREMENT_SIGMA": 1,
         "BURST_SIZE_MU": 2,
         "BURST_SIZE_SIGMA": 1,
-        "SAMPLE": "REQ1"
+        "SAMPLE": "REQ1",
+        "ENTRY_NODES": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
 }

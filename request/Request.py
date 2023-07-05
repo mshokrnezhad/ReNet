@@ -1,13 +1,8 @@
 import config
-import math
-import matplotlib.pyplot as plt
 import numpy as np
 rnd = np.random
 REQUEST_INIT = config.REQUEST_INIT  # Default configs
 REQUEST_SAMPLE = config.REQUEST_SAMPLE  # Sample requests
-
-# CAPACITY_REQUIREMENT_LB=10, CAPACITY_REQUIREMENT_UB=31, BW_REQUIREMENT_LB=20, BW_REQUIREMENT_UB=21, BURST_SIZE_LB=5, BURST_SIZE_UB=6 from v1 to v5
-# CAPACITY_REQUIREMENT_LB=1, CAPACITY_REQUIREMENT_UB=4 for v6
 
 
 class Request:
@@ -42,7 +37,10 @@ class Request:
         self.BURST_SIZES = self.initialize_burst_sizes()
 
     def initialize_entry_nodes(self):
-        return np.random.choice(self.FIRST_TIER_NODES, size=self.NUM_REQUESTS)
+        if self.SAMPLE == "":
+            return np.random.choice(self.FIRST_TIER_NODES, size=self.NUM_REQUESTS)
+        else:
+            return REQUEST_SAMPLE[self.SAMPLE]["ENTRY_NODES"]
 
     def initialize_capacity_requirements(self):
         mu = self.DC_CAPACITY_REQUIREMENT_MU
