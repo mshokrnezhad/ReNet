@@ -4,20 +4,20 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 rnd = np.random
-NETWORK_INIT = config.NETWORK_INIT  #Default configs
-NETWORK_SAMPLE = config.NETWORK_SAMPLE  #Sample networks
+NETWORK_INIT = config.NETWORK_INIT  # Default configs
+NETWORK_SAMPLE = config.NETWORK_SAMPLE  # Sample networks
 
 
 class Network:
     def __init__(self, INPUT):
-        #Building INPUT
+        # Building INPUT
         self.INPUT = {}
         for key in NETWORK_INIT.keys():
             if ("SAMPLE" in INPUT.keys() and INPUT["SAMPLE"] != ""):
                 self.INPUT[key] = NETWORK_SAMPLE[INPUT["SAMPLE"]][key]
             else:
                 self.INPUT[key] = INPUT[key] if key in INPUT else NETWORK_INIT[key]
-        #Defining base variables
+        # Defining base variables
         self.SEED = self.INPUT["SEED"]
         self.NUM_NODES = self.INPUT["NUM_NODES"]
         self.NUM_TIERS = self.INPUT["NUM_TIERS"]
@@ -39,7 +39,7 @@ class Network:
         self.NUM_PATHS_UB = self.INPUT["NUM_PATHS_UB"]
         self.LINK_LENGTH_UB = self.INPUT["LINK_LENGTH_UB"]
         self.SAMPLE = self.INPUT["SAMPLE"]
-        #Defining complementary variables
+        # Defining complementary variables
         rnd.seed(self.SEED)
         self.PRIORITIES = np.linspace(0, self.NUM_PRIORITY_LEVELS, self.NUM_PRIORITY_LEVELS + 1).astype(int)
         self.NODES = np.arange(self.NUM_NODES)
@@ -54,7 +54,7 @@ class Network:
         self.LINK_COSTS, self.LINK_COSTS_MATRIX = self.initialize_link_costs()
         self.LINK_DELAYS, self.LINK_DELAYS_MATRIX = self.initialize_link_delays()
         self.FIRST_TIER_NODES = self.get_first_tier_nodes()
-        self.NUM_PATHS, self.PATHS_LIST, self.PATHS_PER_HEAD, self.PATHS_PER_TAIL = self.find_all_paths() #PATHS_PER_HEAD[i] denotes paths that begin at node i, PATHS_PER_TAIL[i] denotes paths that end at node i
+        self.NUM_PATHS, self.PATHS_LIST, self.PATHS_PER_HEAD, self.PATHS_PER_TAIL = self.find_all_paths()  # PATHS_PER_HEAD[i] denotes paths that begin at node i, PATHS_PER_TAIL[i] denotes paths that end at node i
         self.LINKS_PATHS_MATRIX = self.match_paths_to_links()
 
     def initialize_coordinates(self):
@@ -150,7 +150,7 @@ class Network:
 
         return link_bws, link_bws_matrix, link_bws_limit_per_priority, link_bws_cum_limit_per_priority
 
-    def update_link_bws(self, priority, path, bw_requirement): #It updates LINK_BWS, LINK_BWS_MATRIX, and LINK_BWS_LIMIT_PER_PRIORITY after allocating a priority and a path to a request.
+    def update_link_bws(self, priority, path, bw_requirement):  # It updates LINK_BWS, LINK_BWS_MATRIX, and LINK_BWS_LIMIT_PER_PRIORITY after allocating a priority and a path to a request.
         link_indexes = [i for i in range(self.NUM_LINKS) if self.LINKS_PATHS_MATRIX[i][path] == 1]
 
         for index in link_indexes:
@@ -173,7 +173,7 @@ class Network:
 
         return link_costs, link_costs_matrix
 
-    def initialize_link_delays(self): #For more details, check the source paper. 
+    def initialize_link_delays(self):  # For more details, check the source paper.
         link_delays_matrix = np.ones((self.NUM_PRIORITY_LEVELS + 1, self.NUM_NODES, self.NUM_NODES)) * 10
         link_delays = np.zeros((self.NUM_LINKS, self.NUM_PRIORITY_LEVELS + 1))
 
@@ -189,14 +189,14 @@ class Network:
 
         return link_delays, link_delays_matrix
 
-    def find_burst_size_limit_per_priority(self): #For more details, check the source paper. 
+    def find_burst_size_limit_per_priority(self):  # For more details, check the source paper.
         burst_size_limit_per_priority = np.array([((self.NUM_PRIORITY_LEVELS + 1 - i) / np.array(self.PRIORITIES).sum()) * self.BURST_SIZE_LIMIT if i > 0 else 0 for i in self.PRIORITIES]).astype(int)
         # link_bursts = np.array([burst_size_limit_per_priority for l in self.LINKS]).astype(int)
         burst_size_cum_limit_per_priority = np.array([np.array(burst_size_limit_per_priority[:i + 1]).sum() for i in self.PRIORITIES]).astype(int)
 
         return burst_size_limit_per_priority, burst_size_cum_limit_per_priority
 
-    def update_burst_size_limit_per_priority(self, priority, burst_size): #It updates BURST_SIZE_LIMIT_PER_PRIORITY after allocating a priority to a request.
+    def update_burst_size_limit_per_priority(self, priority, burst_size):  # It updates BURST_SIZE_LIMIT_PER_PRIORITY after allocating a priority to a request.
         self.BURST_SIZE_LIMIT_PER_PRIORITY[priority] -= burst_size
 
     def get_state(self):
@@ -220,7 +220,7 @@ class Network:
 
         return node_features, self.LINKS_MATRIX, link_features
 
-    def update_state(self, action={}, req_info={}): #It updates the network state after receiving an action from a request.
+    def update_state(self, action={}, req_info={}):  # It updates the network state after receiving an action from a request.
         node = action["node"] if "node" in action.keys() else ""
         priority = action["priority"] if "priority" in action.keys() else ""
         req_path = req_info["req_path"] if "req_path" in req_info.keys() else ""

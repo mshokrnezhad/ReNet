@@ -13,4 +13,12 @@ The environment includes:
 
     - How to config: ./network/config.py
 
+- REQUEST:
+
+    - CLASS: ./network/REQUEST.py
+
+    - How to run: ./request/main.py
+
+    - How to config: ./request/config.py
+
 Details will be added soon :)
