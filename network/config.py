@@ -1,6 +1,6 @@
-NETWORK_INIT = {  # The default configuration of the NETWORK class.
+NETWORK_INIT = {  # The NETWORK class's default configuration. If you do not pass any attribute, it will default to the value defined here.  
     "SEED": 4,
-    "NUM_NODES": 10,
+    "NUM_NODES": 6,
     "NUM_PRIORITY_LEVELS": 1,
     "NUM_TIERS": 3,
     "TIER_HEIGHT": 100,
@@ -24,27 +24,6 @@ NETWORK_INIT = {  # The default configuration of the NETWORK class.
 
 NETWORK_SAMPLE = {
     "NET1": {
-        "NUM_NODES": 6,
-        "NUM_PRIORITY_LEVELS": 2,
-        "SEED": 4,
-        "NUM_TIERS": 3,
-        "TIER_HEIGHT": 100,
-        "TIER_WIDTH": 20,
-        "DC_CAPACITY_MU": 100,
-        "DC_CAPACITY_SIGMA": 10,
-        "DC_CAPACITY_GROWTH_RATE": 100,
-        "DC_COST_MU": 1000,
-        "DC_COST_SIGMA": 10,
-        "DC_COST_DECREASE_RATE": 200,
-        "LINK_BW_MU": 250,
-        "LINK_BW_SIGMA": 50,
-        "LINK_COST_MU": 20,
-        "LINK_COST_SIGMA": 5,
-        "BURST_SIZE_LIMIT": 200,
-        "PACKET_SIZE": 1,
-        "NUM_PATHS_UB": 2,
-        "LINK_LENGTH_UB": 5,
-        "SAMPLE": "NET1",
         "X_LOCS": [5, 10, 45, 35, 65, 70],
         "Y_LOCS": [55, 25, 65, 20, 55, 10],
         "LINKS_LIST": [(0, 1), (1, 0), (0, 2), (2, 0), (0, 3), (3, 0), (1, 3), (3, 1), (2, 3), (3, 2), (2, 4), (4, 2), (3, 4), (4, 3), (3, 5), (5, 3), (4, 5), (5, 4)]

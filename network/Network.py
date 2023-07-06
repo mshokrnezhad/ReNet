@@ -1,4 +1,4 @@
-import config
+from . import config
 import math
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -11,12 +11,7 @@ NETWORK_SAMPLE = config.NETWORK_SAMPLE  # Sample networks
 class Network:
     def __init__(self, INPUT):
         # Building INPUT
-        self.INPUT = {}
-        for key in NETWORK_INIT.keys():
-            if ("SAMPLE" in INPUT.keys() and INPUT["SAMPLE"] != ""):
-                self.INPUT[key] = NETWORK_SAMPLE[INPUT["SAMPLE"]][key]
-            else:
-                self.INPUT[key] = INPUT[key] if key in INPUT else NETWORK_INIT[key]
+        self.INPUT = {key: INPUT[key] if key in INPUT else NETWORK_INIT[key] for key in NETWORK_INIT.keys()}
         # Defining base variables
         self.SEED = self.INPUT["SEED"]
         self.NUM_NODES = self.INPUT["NUM_NODES"]
