@@ -87,6 +87,7 @@ class Request:
 
         for r in self.REQUESTS:
             request_feature = []
+            request_feature.append(self.ASSIGNED_SERVICES[r])
             request_feature.append(self.ENTRY_NODES[r])
             request_feature.append(self.DC_CAPACITY_REQUIREMENTS[r])
             request_feature.append(self.BW_REQUIREMENTS[r])

@@ -215,20 +215,20 @@ class Network:
 
         return node_features, self.LINKS_MATRIX, link_features
 
-    def update_state(self, action={}, req_info={}):  # It updates the network state after receiving an action from a request.
+    def update_state(self, action={}):  # It updates the network state after receiving an action from a request.
         node = action["node"] if "node" in action.keys() else ""
         priority = action["priority"] if "priority" in action.keys() else ""
-        req_path = req_info["req_path"] if "req_path" in req_info.keys() else ""
-        rpl_path = req_info["rpl_path"] if "rpl_path" in req_info.keys() else ""
+        req_path = action["req_path"] if "req_path" in action.keys() else ""
+        rpl_path = action["rpl_path"] if "rpl_path" in action.keys() else ""
 
         if node != "":
-            self.update_dc_capacities(node, req_info["dc_capacity_requirement"])
+            self.update_dc_capacities(node, action["dc_capacity_requirement"])
         if priority != "":
-            self.update_burst_size_limit_per_priority(priority, req_info["burst_size"])
+            self.update_burst_size_limit_per_priority(priority, action["burst_size"])
             if req_path != "":
-                self.update_link_bws(priority, req_path, req_info["bw_requirement"])
+                self.update_link_bws(priority, req_path, action["bw_requirement"])
             if rpl_path != "":
-                self.update_link_bws(priority, rpl_path, req_info["bw_requirement"])
+                self.update_link_bws(priority, rpl_path, action["bw_requirement"])
 
     def get_tier_num(self, i):
         tier_num = 0

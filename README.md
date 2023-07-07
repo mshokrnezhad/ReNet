@@ -29,4 +29,8 @@ The environment includes:
 
     - How to config: ./service/config.py
 
-Details will be added soon :)
+- ENVIRONMENT: The primary environmental class. You can get the state, update it by passing action, and reset the environment from here. It contains NETWORK, SERVICE, and REQUEST.
+
+    - CLASS: ./service/ENVIRONMENT.py
+
+    - How to run: ./main_environment.py
