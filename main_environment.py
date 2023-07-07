@@ -1,5 +1,5 @@
 # This file includes some examples showing how to instantiate the ENVIRONMENT class, get its state, update it, and reset the object.
-from environment.Environment import Environment
+from Environment import Environment
 
 # Creating an environment instance:
 INPUT = {
